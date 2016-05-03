@@ -3,18 +3,22 @@
     .controller('phoreController', phoreCtrl) //['$scope', function($scope){}]
     
     //pokeCtrl.$inject = ['$scope'] // for $scope injection on John Papa style Angular
-    phoreCtrl.$inject = ['$scope','$http','ipAPIFactory','forecastAPIFactory']  // ['$scope,'$http']
+    phoreCtrl.$inject = ['$scope','$http','ipAPIFactory','forecastAPIFactory','flickrAPIFactory','giphyAPIFactory']  // ['$scope,'$http']
     
-    function phoreCtrl ($scope, $http, ipAPIFactory, forecastAPIFactory) { //($scope, $http)
+    function phoreCtrl ($scope, $http, ipAPIFactory, forecastAPIFactory, flickrAPIFactory, giphyAPIFactory) { //($scope, $http)
         var pCtrl = this
 
         pCtrl.name = "Test"
-        
+
 
        ipAPIFactory.returnWeather(forecastAPIFactory.getForecast).then(function(response){
             pCtrl.currentWeather = response
 
             pCtrl.day0Temp = Math.round(response.currently.temperature)
+
+            flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
+                console.log(flickrResponse)
+            })
 
             pCtrl.day0summary = response.daily.data[0].summary
             pCtrl.day0tempMax = Math.round(response.daily.data[0].temperatureMax)
@@ -62,8 +66,6 @@
             pCtrl.day6day = days[d6.getDay()] 
             pCtrl.day6date = d6.getMonth()+1 + '/' + d6.getDate() 
             
-
-
             // console.log('d0: ', days[d0.getDay()] + ', ' + d0.getMonth()+1 + '/' + d0.getDate())
             // console.log('d1: ', d1.getMonth()+1 + '/' + d1.getDate())
             // console.log('d2: ', d2.getMonth()+1 + '/' + d2.getDate())
@@ -75,6 +77,10 @@
             pCtrl.day1summary = response.daily.data[1].summary
             pCtrl.day1tempMax = Math.round(response.daily.data[1].temperatureMax)
             pCtrl.day1tempMin = Math.round(response.daily.data[1].temperatureMin)
+
+            giphyAPIFactory.getGIFs('sunny').then(function(giphyResponse) {
+                console.log('giphy ctrl: ', giphyResponse)
+            })
 
             pCtrl.day2summary = response.daily.data[2].summary
             pCtrl.day2tempMax = Math.round(response.daily.data[2].temperatureMax)
@@ -96,8 +102,31 @@
             pCtrl.day6tempMax = Math.round(response.daily.data[6].temperatureMax)
             pCtrl.day6tempMin = Math.round(response.daily.data[6].temperatureMin)
 
-            console.log("from factory",response)
+             console.log("from factory",response)
        })
+
+            // flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
+            //     console.log(flickrResponse)
+            // })
+
+            // console.log('Flickr ctrl call: ', flickrAPIFactory.getImages('rain'))
+
+            // console.log('Giphy ctrl call: ', giphyAPIFactory.getGIFs('sunny'))
+
+            // flickrResponse = {}
+            // setInterval(function getFlickr() {
+            //     flickrResponse = flickrAPIFactory.getImages('rain')
+            //     console.log('image ID: ', flickrAPIFactory.getImages('rain'.data.images.image[2].id)
+            // }(), 3000)
+
+            // .then(function(response) {
+            //     console.log ('Ctrl Flickr: ',response)
+            // }}
+
+        // flickrAPIFactory.returnFlickr(flickrAPIFactory.getImages).then(function(response){
+        //     console.log ('Ctrl Flickr: ',response)
+
+        // })
 
     }
     

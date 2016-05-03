@@ -3,6 +3,7 @@
     .factory('ipAPIFactory', ipAPIFactory) //['$scope', function($scope){}]
     .factory('forecastAPIFactory', forecastAPIFactory) //['$scope', function($scope){}]
     .factory('flickrAPIFactory', flickrAPIFactory)
+    .factory('giphyAPIFactory', giphyAPIFactory)
 
     
     //pokeCtrl.$inject = ['$scope'] // for $scope injection on John Papa style Angular
@@ -11,9 +12,20 @@
     function ipAPIFactory ($http) { //($scope, $http)
 
         var ipAPI = {}
+        var latitude = 0
+        var longitude = 0
 
         ipAPI.returnWeather = function(callback){
             console.log("calling return weather",callback)
+            return $http.get('http://ip-api.com/json').then(function(response) {
+                latitude = response.data.lat
+                longitude = response.data.lon
+                return callback(response.data.lat,response.data.lon)
+            })
+        }
+
+        ipAPI.returnFlickr = function(callback){
+            console.log("calling return Flickr: ",callback)
             return $http.get('http://ip-api.com/json').then(function(response) {
                 return callback(response.data.lat,response.data.lon)
             })
@@ -25,17 +37,14 @@
                 $http.get('http://ip-api.com/json').then(function(response) {
 
                     console.log('response: ',response)
-                    // console.log(error, response)
-                    // if (!error) {
-                    //     console.log('fulfill')
-                        fulfill(response.data)
-                    // } else {
-                    //     console.log('reject')
-                    //     reject(error)
-                    // }
+       
+                    fulfill(response.data)
+
                 }, function(error){
+
                     console.log('error', error)
                     reject(error)
+
                 })
             })
         }
@@ -52,12 +61,12 @@
 
         forecastAPI.getForecast = function(lat, lon) {
 
-                console.log("calling get forecast", lat, lon)
+                // console.log("calling get forecast", lat, lon)
                 var url = "https://api.forecast.io/forecast/0c7f10d0d5fa0d8602b3c9664767e7f7/" + lat + "," + lon + "?callback=JSON_CALLBACK"
 
                return $http.jsonp(url).then(function(response) {
 
-                    console.log('Forcast response: ',response)
+                    // console.log('Forcast response: ',response)
                     return response.data
                 })
 
@@ -79,11 +88,11 @@
 
                 console.log("calling flickr: ", tag)
 
-                var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=532bbe82ed3f5860b6b2c4dc0c939631&tags=rain&format=json&nojsoncallback=1"
+                var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=532bbe82ed3f5860b6b2c4dc0c939631&format=json&nojsoncallback=1&tags=" + tag
 
                return $http.get(url).then(function(response) {
 
-                    console.log('flickr response: ',response)
+                    console.log('flickr factory response: ',response)
                     return response.data
                 })
 
@@ -91,6 +100,29 @@
         }
 
         return flickrAPI
+    }  
+
+
+    function giphyAPIFactory ($http) {
+
+        var giphyAPI = {}    
+
+        giphyAPI.getGIFs = function(term) {
+
+                console.log("calling giphy: ", term)
+
+                var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=" + term
+
+               return $http.get(url).then(function(response) {
+
+                    console.log('giphy factory response: ',response)
+                    return response.data
+                })
+
+             
+        }
+
+        return giphyAPI
     }  
 
 
