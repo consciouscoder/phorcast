@@ -7,49 +7,160 @@
     <title>Mid-term Project</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" type="text/css">    
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" type="text/css">     
 </head>
 
     <body ng-controller="phoreController as pCtrl">
-        
+
         <div class="container">
             
-          <div class="row">
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/900x100"><BR>
+            <div class="header">
+              Phorcast<BR>
             </div>
-          </div>
             
-            
-          <div class="row">
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/300x200">
+          <div class="box-container">
+            <div class="floating-box">
+              <div class="data-box">
+                {{ pCtrl.day0day }}, {{ pCtrl.day0date }}<BR>
+                {{ pCtrl.day0Temp }}&deg; F<BR>
+                Cloudy<BR>
+                {{ pCtrl.day0tempMax }}&deg; / {{ pCtrl.day0tempMin }}&deg;<BR>
+              </div>
+              <div class="giphy-box">
+                <img src="https://placehold.it/200x100">
+              </div>
+              <div class="summary-box">
+                <div class="summary-icon">
+                  <canvas id="icon0" width="80" height="80"></canvas>
+                </div>
+                <div class="summary-text">
+                  {{ pCtrl.day0summary }}
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/300x200">
+
+            <div class="floating-box">
+              <div class="data-box">
+                {{ pCtrl.day1day }}, {{ pCtrl.day1date }}<BR>
+                Cloudy<BR>
+                {{ pCtrl.day1tempMax }}&deg; / {{ pCtrl.day1tempMin }}&deg;<BR>
+              </div>
+              <div class="giphy-box">
+                <img src="https://placehold.it/200x100">
+              </div>
+              <div class="summary-box">
+                <div class="summary-icon">
+                  <canvas id="icon1" width="80" height="80"></canvas>
+                </div>
+                <div class="summary-text">
+                  {{ pCtrl.day1summary }}
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/300x200">
+
+            <div class="floating-box">
+              <div class="data-box">
+                {{ pCtrl.day2day }}, {{ pCtrl.day2date }}<BR>
+                Cloudy<BR>
+                {{ pCtrl.day2tempMax }}&deg; / {{ pCtrl.day2tempMin }}&deg;<BR>
+              </div>
+                <div class="giphy-box">
+                <img src="https://placehold.it/200x100">
+              </div>
+              <div class="summary-box">
+                <div class="summary-icon">
+                  <canvas id="icon2" width="80" height="80"></canvas>
+                </div>
+                <div class="summary-text">
+                  {{ pCtrl.day2summary }}
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/300x200">
+
+            <div class="floating-box">
+              <div class="data-box">
+                {{ pCtrl.day3day }}, {{ pCtrl.day3date }}<BR>
+                Cloudy<BR>
+                {{ pCtrl.day3tempMax }}&deg; / {{ pCtrl.day3tempMin }}&deg;<BR>
+              </div>
+              <div class="giphy-box">
+                <img src="https://placehold.it/200x100">
+              </div>
+              <div class="summary-box">
+                <div class="summary-icon">
+                  <canvas id="icon3" width="80" height="80"></canvas>
+                </div>
+                <div class="summary-text">
+                  {{ pCtrl.day3summary }}
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/300x200">
+
+            <div class="floating-box">
+              <div class="data-box">
+                {{ pCtrl.day4day }}, {{ pCtrl.day4date }}<BR>
+                Cloudy<BR>
+                {{ pCtrl.day4tempMax }}&deg; / {{ pCtrl.day4tempMin }}&deg;<BR>
+              </div>
+              <div class="giphy-box">
+                <img src="https://placehold.it/200x100">
+              </div>
+              <div class="summary-box">
+                <div class="summary-icon">
+                  <canvas id="icon4" width="80" height="80"></canvas>
+                </div>
+                <div class="summary-text">
+                  {{ pCtrl.day4summary }}
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/300x200">
+
+            <div class="floating-box">
+              <div class="data-box">
+                {{ pCtrl.day5day }}, {{ pCtrl.day5date }}<BR>
+                Cloudy<BR>
+                {{ pCtrl.day5tempMax }}&deg; / {{ pCtrl.day5tempMin }}&deg;<BR>
+              </div>
+              <div class="giphy-box">
+                <img src="https://placehold.it/200x100">
+              </div>
+              <div class="summary-box">
+                <div class="summary-icon">
+                  <canvas id="icon5" width="80" height="80"></canvas>
+                </div>
+                <div class="summary-text">
+                  {{ pCtrl.day5summary }}
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-              <img src="https://placehold.it/300x200">
-            </div>            
+
+            <div class="floating-box">
+              <div class="data-box">
+                {{ pCtrl.day6day }}, {{ pCtrl.day6date }}<BR>
+                Cloudy<BR>
+                {{ pCtrl.day6tempMax }}&deg; / {{ pCtrl.day6tempMin }}&deg;<BR>
+              </div>
+              <div class="giphy-box">
+                <img src="https://placehold.it/200x100">
+              </div>
+              <div class="summary-box">
+                <div class="summary-icon">
+                  <canvas id="icon6" width="80" height="80"></canvas>
+                </div>
+                <div class="summary-text">
+                  {{ pCtrl.day6summary }}
+                </div>
+              </div>
+            </div>      
+
+
           </div>
-          
+  
         </div>
 
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="factory.js"></script>        
+        <script type="text/javascript" src="skycons.js"></script>   
     </body>       
 </html>        
         

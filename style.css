@@ -1,5 +1,83 @@
 /*# Main CSS - mid-term*/
 
-div {
-	margin: 10px;
+.container {
+	width: 900px;
+}
+
+.header {
+  color: #111; 
+  font-family: 'Open Sans Condensed', sans-serif; 
+  font-size: 64px; 
+  font-weight: 700; 
+  line-height: 64px; 
+  margin: 0 0 0; 
+  padding: 20px 30px; 
+  text-align: center; 
+  text-transform: uppercase; 
+}
+
+.box-container {
+/*	overflow: visible;*/
+	text-align: center;
+	vertical-align: middle;
+}
+
+.floating-box {
+    display: inline-block;
+    overflow: hidden;
+    width: 350px;
+    height: 200px;
+    border: 2px solid Black;  
+    margin: 10px;
+}
+
+.data-box {
+	display: inline-block;
+	position: relative;
+	float: left;
+	left: 0px;
+	width: 146px;
+	height: 100px;
+	padding-top: 5px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.giphy-box {
+    left: 146px;
+    top: 0px;
+/*	float: right;*/
+	margin-left: 146px;
+}
+
+.summary-box {
+	height: 98px;
+	width: 346px;
+/*	padding-top: 35px;*/
+	text-align: center;
+	vertical-align: middle;
+}
+
+.summary-icon {
+	padding-top: 5px;
+	padding-left: 15px;
+	display: inline-block;
+	position: relative;
+	float: left;
+	left: 0px;
+	top: 0px;
+/*	width: 146px;
+	height: 100px;	*/
+}
+
+.summary-text {
+    left: 100px;
+    top: 0px;
+/*	float: right;*/
+	margin-left: 100px;
+	text-align: center;
+	font-size: 12px;
+	vertical-align: middle;	
+	padding-top: 35px;
 }
