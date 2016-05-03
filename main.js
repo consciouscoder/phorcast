@@ -20,7 +20,7 @@
             pCtrl.day0tempMax = Math.round(response.daily.data[0].temperatureMax)
             pCtrl.day0tempMin = Math.round(response.daily.data[0].temperatureMin)
 
-            var skycons = new Skycons({"color": "pink"})
+            var skycons = new Skycons({"color": "LightBlue"}) // {"color": "pink"}
             skycons.add("icon0", response.daily.data[0].icon)
             skycons.add("icon1", response.daily.data[1].icon)
             skycons.add("icon2", response.daily.data[2].icon)
@@ -99,6 +99,11 @@
             console.log("from factory",response)
        })
 
+    }
+    
+}());
+
+
             // var p = new Promise(function(resolve, reject) {  
             //    if (/* condition */) {
             //       resolve(/* value */);  // fulfilled successfully
@@ -168,7 +173,5 @@
         
         // LOOK INTO PROMISES -- USEFUL
 
-    }
-    
-}());
+
 

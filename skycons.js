@@ -529,6 +529,8 @@
       };
 
   Skycons.CLEAR_DAY = function(ctx, t, color) {
+
+    color = "Gold"
     var w = ctx.canvas.width,
         h = ctx.canvas.height,
         s = Math.min(w, h);
@@ -549,7 +551,7 @@
         h = ctx.canvas.height,
         s = Math.min(w, h);
 
-    sun(ctx, t, w * 0.625, h * 0.375, s * 0.75, s * STROKE, color);
+    sun(ctx, t, w * 0.625, h * 0.375, s * 0.75, s * STROKE, "Gold");
     cloud(ctx, t, w * 0.375, h * 0.625, s * 0.75, s * STROKE, color);
   };
 
