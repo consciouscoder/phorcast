@@ -111,11 +111,11 @@
 
                 console.log("calling giphy: ", term)
 
-                var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=" + term
+                var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=50&q=" + term
 
                return $http.get(url).then(function(response) {
 
-                    console.log('giphy factory response: ',response)
+                    // console.log('giphy factory response: ',response)
                     return response.data
                 })
 

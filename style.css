@@ -7,17 +7,49 @@
 .header {
   color: #111; 
   font-family: 'Open Sans Condensed', sans-serif; 
-  font-size: 64px; 
+  font-size: 60px; 
   font-weight: 700; 
-  line-height: 64px; 
+  line-height: 60px; 
   margin: 0 0 0; 
-  padding: 20px 30px; 
+  padding: 10px 10px; 
   text-align: center; 
   text-transform: uppercase; 
 }
 
+.city-name {
+	text-align: center;
+	vertical-align: middle;	
+}
+
+.city-box {
+
+	width: 600px;
+
+	text-align: center;
+	vertical-align: middle;
+    width: 50%;
+    margin: 0 auto; 
+}
+
+.city-text {
+	display: inline-block;
+	width: 400px;
+	position: relative;
+	text-align: right;
+}
+
+.city-button {
+	width: 100px;
+	position: absolute;
+	float: top;
+    display: inline-block;
+	margin-left: 50px;
+	top: 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+
 .box-container {
-/*	overflow: visible;*/
 	text-align: center;
 	vertical-align: middle;
 }
@@ -26,8 +58,8 @@
     display: inline-block;
     overflow: hidden;
     width: 350px;
-    height: 200px;
-    border: 2px solid Black;  
+    height: 205px;
+    border: 2px solid Grey;  
     margin: 10px;
     border-radius: 10px;
 }
@@ -50,6 +82,14 @@
     top: 0px;
 /*	float: right;*/
 	margin-left: 146px;
+	width: 200px;
+	height: 115px;
+	overflow: hidden;
+}
+
+.giphy-box img {
+    width: 100%;
+    height: 100%;
 }
 
 .summary-box {
@@ -61,8 +101,9 @@
 }
 
 .summary-icon {
-	padding-top: 5px;
-	padding-left: 15px;
+	float: top;
+	padding-top: 0px;
+	padding-left: 5px;
 	display: inline-block;
 	position: relative;
 	float: left;
@@ -80,5 +121,5 @@
 	text-align: center;
 	font-size: 12px;
 	vertical-align: middle;	
-	padding-top: 35px;
+	padding-top: 30px;
 }

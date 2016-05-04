@@ -11,8 +11,62 @@
         pCtrl.name = "Test"
 
 
-       ipAPIFactory.returnWeather(forecastAPIFactory.getForecast).then(function(response){
-            pCtrl.currentWeather = response
+
+       ipAPIFactory.returnWeather(forecastAPIFactory.getForecast).then(setAPIForcast)
+
+       pCtrl.getCityForecast = function(sCity) {
+
+            var geocoder =  new google.maps.Geocoder()
+
+            // Maps Key: AIzaSyB2GJm8JWyDKBwdcdq_xRN-B1Q3KUGTPiQ
+
+            console.log ('search city: ', sCity)
+
+            sCity = "\'" + sCity + "\'"
+
+            cityObj = {}
+
+            cityObj = { 'address': sCity }
+
+              // geocoder.geocode( { 'address': 'houston' }, function(results, status) {
+
+            geocoder.geocode( cityObj, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                console.log("Google Maps location : " + results[0].geometry.location.lat() + " " + results[0].geometry.location.lng())
+              } else {
+                console.log("Google MAPS: Something went wrong. " + status)
+              }
+              // Get Forcast and populate everything =====
+              forecastAPIFactory.getForecast(results[0].geometry.location.lat(), results[0].geometry.location.lng()).then(setAPIForcast)
+            })
+
+       }
+
+            // flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
+            //     console.log(flickrResponse)
+            // })
+
+            // console.log('Flickr ctrl call: ', flickrAPIFactory.getImages('rain'))
+
+            // console.log('Giphy ctrl call: ', giphyAPIFactory.getGIFs('sunny'))
+
+            // flickrResponse = {}
+            // setInterval(function getFlickr() {
+            //     flickrResponse = flickrAPIFactory.getImages('rain')
+            //     console.log('image ID: ', flickrAPIFactory.getImages('rain'.data.images.image[2].id)
+            // }(), 3000)
+
+            // .then(function(response) {
+            //     console.log ('Ctrl Flickr: ',response)
+            // }}
+
+        // flickrAPIFactory.returnFlickr(flickrAPIFactory.getImages).then(function(response){
+        //     console.log ('Ctrl Flickr: ',response)
+
+        // })
+        function setAPIForcast(response) {
+
+            pCtrl.cityName = response.timezone
 
             pCtrl.day0Temp = Math.round(response.currently.temperature)
 
@@ -78,9 +132,68 @@
             pCtrl.day1tempMax = Math.round(response.daily.data[1].temperatureMax)
             pCtrl.day1tempMin = Math.round(response.daily.data[1].temperatureMin)
 
-            giphyAPIFactory.getGIFs('sunny').then(function(giphyResponse) {
+
+            // Pairing Forecast.io icon values with giphy search strings.
+                var searchTerms = {
+                    "clear-day": "sun",
+                    "clear-night": "stars",
+                    "rain": "rain",
+                    "snow": "snow",
+                    "sleet": "sleet",
+                    "wind": "tornado",
+                    "fog": "foggy",
+                    "cloudy": "clouds",
+                    "partly-cloudy-day": "cloudy+sun",
+                    "partly-cloudy-night": "clouds+night"
+                }
+        
+
+            //console.log(searchTerms[response.daily.data[0].icon])
+            function getRandomGiphy(myArray) {
+                return randomValue = myArray[Math.floor(Math.random() * myArray.length)]
+            }
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[0].icon]).then(function(giphyResponse) {
+                console.log('getRandomGiphy: ', getRandomGiphy(giphyResponse.data))
                 console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day0giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+                //pCtrl.day0giphy = giphyResponse.data[0].images.fixed_width.url                
             })
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[1].icon]).then(function(giphyResponse) {
+                //console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day1giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[2].icon]).then(function(giphyResponse) {
+                //console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day2giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[3].icon]).then(function(giphyResponse) {
+                //console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day3giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[4].icon]).then(function(giphyResponse) {
+                //console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day4giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[5].icon]).then(function(giphyResponse) {
+                //console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day5giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[6].icon]).then(function(giphyResponse) {
+                //console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day6giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+
+
+            // giphyAPIFactory.getGIFs('sunny').then(function(giphyResponse) {
+            //     console.log('giphy ctrl: ', giphyResponse)
+            // })
 
             pCtrl.day2summary = response.daily.data[2].summary
             pCtrl.day2tempMax = Math.round(response.daily.data[2].temperatureMax)
@@ -103,30 +216,7 @@
             pCtrl.day6tempMin = Math.round(response.daily.data[6].temperatureMin)
 
              console.log("from factory",response)
-       })
-
-            // flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
-            //     console.log(flickrResponse)
-            // })
-
-            // console.log('Flickr ctrl call: ', flickrAPIFactory.getImages('rain'))
-
-            // console.log('Giphy ctrl call: ', giphyAPIFactory.getGIFs('sunny'))
-
-            // flickrResponse = {}
-            // setInterval(function getFlickr() {
-            //     flickrResponse = flickrAPIFactory.getImages('rain')
-            //     console.log('image ID: ', flickrAPIFactory.getImages('rain'.data.images.image[2].id)
-            // }(), 3000)
-
-            // .then(function(response) {
-            //     console.log ('Ctrl Flickr: ',response)
-            // }}
-
-        // flickrAPIFactory.returnFlickr(flickrAPIFactory.getImages).then(function(response){
-        //     console.log ('Ctrl Flickr: ',response)
-
-        // })
+       }
 
     }
     
