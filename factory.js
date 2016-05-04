@@ -20,7 +20,9 @@
             return $http.get('http://ip-api.com/json').then(function(response) {
                 latitude = response.data.lat
                 longitude = response.data.lon
-                return callback(response.data.lat,response.data.lon)
+                console.log('IP API city: ', response.data.city)
+                console.log('IP API region: ', response.data.regionName)               
+                return callback(response.data.lat , response.data.lon, response.data.city, response.data.regionName)
             })
         }
 
@@ -59,13 +61,14 @@
         var forecastAPI = {}
    
 
-        forecastAPI.getForecast = function(lat, lon) {
+        forecastAPI.getForecast = function(lat, lon, city, region) {
 
                 // console.log("calling get forecast", lat, lon)
                 var url = "https://api.forecast.io/forecast/0c7f10d0d5fa0d8602b3c9664767e7f7/" + lat + "," + lon + "?callback=JSON_CALLBACK"
 
                return $http.jsonp(url).then(function(response) {
-
+                    response.data.city = city
+                    response.data.region = region
                     // console.log('Forcast response: ',response)
                     return response.data
                 })
@@ -84,11 +87,18 @@
 
         var flickrAPI = {}    
 
+        // Phorcast
+        // Key:
+        // f3fa1c74449c9e043db8f8176706ce75
+
+        // Secret:
+        // 02b54950c963ed88
+
         flickrAPI.getImages = function(tag) {
 
                 console.log("calling flickr: ", tag)
 
-                var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=532bbe82ed3f5860b6b2c4dc0c939631&format=json&nojsoncallback=1&tags=" + tag
+                var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f3fa1c74449c9e043db8f8176706ce75&format=json&nojsoncallback=1&tags=" + tag
 
                return $http.get(url).then(function(response) {
 
@@ -111,11 +121,13 @@
 
                 console.log("calling giphy: ", term)
 
-                var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=50&q=" + term
+                var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=50&rating=pg-13&q=" + term
+
+                // var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=50&q=" + term
 
                return $http.get(url).then(function(response) {
 
-                    // console.log('giphy factory response: ',response)
+                    console.log('giphy factory response: ',response)
                     return response.data
                 })
 

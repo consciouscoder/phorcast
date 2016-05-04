@@ -23,16 +23,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" rel="home" href="" title="Phorcast - Making weather fun!">PHORCAST</a>
+                    <span class="navbar-brand" rel="home" href="" title="Phorcast - Making weather fun!">PHORCAST</span>
                   </div>
                   
                   <div class="collapse navbar-collapse navbar-ex1-collapse">
                     
-                    <ul class="nav navbar-nav">
+<!--                     <ul class="nav navbar-nav">
                       <li><a href="/topic/notes/">/notes</a></li>
                       <li><a href="/topic/dev/">/dev</a></li>
                       <li><a href="/topic/good-reads/">/good-reads</a></li>
-                    </ul>
+                    </ul> -->
                     
                     <div class="col-sm-3 col-md-3 pull-right">
                     <form class="navbar-form" role="search">
@@ -57,25 +57,17 @@
 
         <div class="container">
             
-            <div class="header">
+<!--        <div class="header">
               Phorcast
+            </div> -->
+
+            <div class="map-box">
+                <div class="map-box" id="map"></div>
             </div>
 
             <div class="city-name"> 
                <h3>{{ pCtrl.cityName }}</h3>
             </div>
-
-<!--             <div class="city-box">
-               <div class="city-text">
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">City</span>
-                    <input type="text" class="form-control" placeholder="City, Country" aria-describedby="basic-addon1">
-                  </div>
-               </div>
-               <div class="city-button">
-                 <button ng-click="pCtrl.getCityForecast()">LOAD</button>
-               </div>
-            </div> -->
 
             
           <div class="box-container">
@@ -88,7 +80,7 @@
                 {{ pCtrl.day0tempMax }}&deg; / {{ pCtrl.day0tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img src="{{ pCtrl.day0giphy }}">
+                <img ng-click="pCtrl.getNewGiphy0()" src="{{ pCtrl.day0giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -107,7 +99,7 @@
                 {{ pCtrl.day1tempMax }}&deg; / {{ pCtrl.day1tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img src="{{ pCtrl.day1giphy }}">
+                <img ng-click="pCtrl.getNewGiphy1()" src="{{ pCtrl.day1giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -126,7 +118,7 @@
                 {{ pCtrl.day2tempMax }}&deg; / {{ pCtrl.day2tempMin }}&deg;<BR>
               </div>
                 <div class="giphy-box">
-                <img src="{{ pCtrl.day2giphy }}">
+                <img ng-click="pCtrl.getNewGiphy2()" src="{{ pCtrl.day2giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -145,7 +137,7 @@
                 {{ pCtrl.day3tempMax }}&deg; / {{ pCtrl.day3tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img src="{{ pCtrl.day3giphy }}">
+                <img ng-click="pCtrl.getNewGiphy3()" src="{{ pCtrl.day3giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -164,7 +156,7 @@
                 {{ pCtrl.day4tempMax }}&deg; / {{ pCtrl.day4tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img src="{{ pCtrl.day4giphy }}">
+                <img ng-click="pCtrl.getNewGiphy4()" src="{{ pCtrl.day4giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -183,7 +175,7 @@
                 {{ pCtrl.day5tempMax }}&deg; / {{ pCtrl.day5tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img src="{{ pCtrl.day5giphy }}">
+                <img ng-click="pCtrl.getNewGiphy5()" src="{{ pCtrl.day5giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -202,7 +194,7 @@
                 {{ pCtrl.day6tempMax }}&deg; / {{ pCtrl.day6tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img src="{{ pCtrl.day6giphy }}">
+                <img ng-click="pCtrl.getNewGiphy6()" src="{{ pCtrl.day6giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">

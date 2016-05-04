@@ -16,6 +16,14 @@
   text-transform: uppercase; 
 }
 
+.map-box {
+	width: 700px;
+	height: 150px;
+	text-align: center;
+	vertical-align: middle;	
+    margin: 0 auto; 
+}
+
 .city-name {
 	text-align: center;
 	vertical-align: middle;	

@@ -8,9 +8,22 @@
     function phoreCtrl ($scope, $http, ipAPIFactory, forecastAPIFactory, flickrAPIFactory, giphyAPIFactory) { //($scope, $http)
         var pCtrl = this
 
-        pCtrl.name = "Test"
+            pCtrl.ioResponse = {}
 
-
+            // Pairing Forecast.io icon values with giphy search strings.
+                var searchTerms = {
+                    "clear-day": "sun",
+                    "clear-night": "stars",
+                    "rain": "rain",
+                    "snow": "snow",
+                    "sleet": "sleet",
+                    "wind": "tornado",
+                    "fog": "foggy",
+                    "cloudy": "clouds",
+                    "partly-cloudy-day": "cloudy+sun",
+                    "partly-cloudy-night": "clouds+night"
+                }
+        
 
        ipAPIFactory.returnWeather(forecastAPIFactory.getForecast).then(setAPIForcast)
 
@@ -18,9 +31,8 @@
 
             var geocoder =  new google.maps.Geocoder()
 
-            // Maps Key: AIzaSyB2GJm8JWyDKBwdcdq_xRN-B1Q3KUGTPiQ
-
-            console.log ('search city: ', sCity)
+            // Google Maps Key: AIzaSyB2GJm8JWyDKBwdcdq_xRN-B1Q3KUGTPiQ
+            // console.log ('search city: ', sCity)
 
             sCity = "\'" + sCity + "\'"
 
@@ -32,7 +44,26 @@
 
             geocoder.geocode( cityObj, function(results, status) {
               if (status == google.maps.GeocoderStatus.OK) {
-                console.log("Google Maps location : " + results[0].geometry.location.lat() + " " + results[0].geometry.location.lng())
+                // console.log("Google Maps location : " + results[0].geometry.location.lat() + " " + results[0].geometry.location.lng())
+                // console.log("Google Maps formatted_address : " + results[0].formatted_address)  
+                pCtrl.cityName = results[0].formatted_address
+
+                    var mapOptions = {
+                       zoom: 8,
+                       center: results[0].geometry.location,
+                       // HYBRID, SATELLITE, ROADMAP, or TERRAIN:
+                       mapTypeId: google.maps.MapTypeId.HYBRID
+                    }
+                    
+                    map = new google.maps.Map(document.getElementById("map"), mapOptions)
+                    //pCtrl.map = new google.maps.Map(element[0], mapOptions)                    
+
+                    // comment marker for now
+                    var marker = new google.maps.Marker({
+                       map: map,
+                       position: results[0].geometry.location
+                    })
+
               } else {
                 console.log("Google MAPS: Something went wrong. " + status)
               }
@@ -60,13 +91,92 @@
             //     console.log ('Ctrl Flickr: ',response)
             // }}
 
-        // flickrAPIFactory.returnFlickr(flickrAPIFactory.getImages).then(function(response){
+        // flickrAPIFactory.returnFlickr(flickrAPIFactory.getImages).then(function(response) {
         //     console.log ('Ctrl Flickr: ',response)
 
         // })
+
+        function getRandomGiphy(myArray) {
+            return randomValue = myArray[Math.floor(Math.random() * myArray.length)]
+        }
+
+        pCtrl.getNewGiphy0 = function(response) {
+
+            response = pCtrl.ioResponse
+
+            console.log('getNewGiphy0: ', response)
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[0].icon]).then(function(giphyResponse) {
+                console.log('getRandomGiphy: ', getRandomGiphy(giphyResponse.data))
+                console.log('giphy ctrl: ', giphyResponse)
+                pCtrl.day0giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url             
+            })
+        }
+
+        pCtrl.getNewGiphy1 = function(response) {
+
+            response = pCtrl.ioResponse
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[1].icon]).then(function(giphyResponse) {
+                pCtrl.day1giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+        }
+
+        pCtrl.getNewGiphy2 = function(response) {
+
+            response = pCtrl.ioResponse
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[2].icon]).then(function(giphyResponse) {
+                pCtrl.day2giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+        }
+
+        pCtrl.getNewGiphy3 = function(response) {
+
+            response = pCtrl.ioResponse
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[3].icon]).then(function(giphyResponse) {
+                pCtrl.day3giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+        }
+
+        pCtrl.getNewGiphy4 = function(response) {
+
+            response = pCtrl.ioResponse
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[4].icon]).then(function(giphyResponse) {
+                pCtrl.day4giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+        }
+
+        pCtrl.getNewGiphy5 = function(response) {
+
+            response = pCtrl.ioResponse
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[5].icon]).then(function(giphyResponse) {
+                pCtrl.day5giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+        }
+
+        pCtrl.getNewGiphy6 = function(response) {
+        
+            response = pCtrl.ioResponse
+
+            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[6].icon]).then(function(giphyResponse) {
+                pCtrl.day6giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            })
+        }
+
+
+
         function setAPIForcast(response) {
 
-            pCtrl.cityName = response.timezone
+            // Only update cityName for first city receive by IP, subsequent updates done in Google MAPS API call
+            if (!pCtrl.cityName) {
+                pCtrl.cityName = response.city + ', ' + response.region
+            }
+
+            pCtrl.ioResponse = response
 
             pCtrl.day0Temp = Math.round(response.currently.temperature)
 
@@ -132,63 +242,55 @@
             pCtrl.day1tempMax = Math.round(response.daily.data[1].temperatureMax)
             pCtrl.day1tempMin = Math.round(response.daily.data[1].temperatureMin)
 
-
-            // Pairing Forecast.io icon values with giphy search strings.
-                var searchTerms = {
-                    "clear-day": "sun",
-                    "clear-night": "stars",
-                    "rain": "rain",
-                    "snow": "snow",
-                    "sleet": "sleet",
-                    "wind": "tornado",
-                    "fog": "foggy",
-                    "cloudy": "clouds",
-                    "partly-cloudy-day": "cloudy+sun",
-                    "partly-cloudy-night": "clouds+night"
-                }
-        
-
             //console.log(searchTerms[response.daily.data[0].icon])
-            function getRandomGiphy(myArray) {
-                return randomValue = myArray[Math.floor(Math.random() * myArray.length)]
-            }
+            // function getRandomGiphy(myArray) {
+            //     return randomValue = myArray[Math.floor(Math.random() * myArray.length)]
+            // }
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[0].icon]).then(function(giphyResponse) {
-                console.log('getRandomGiphy: ', getRandomGiphy(giphyResponse.data))
-                console.log('giphy ctrl: ', giphyResponse)
-                pCtrl.day0giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
-                //pCtrl.day0giphy = giphyResponse.data[0].images.fixed_width.url                
-            })
+            pCtrl.getNewGiphy0(response)
+            pCtrl.getNewGiphy1(response)
+            pCtrl.getNewGiphy2(response)
+            pCtrl.getNewGiphy3(response)
+            pCtrl.getNewGiphy4(response)
+            pCtrl.getNewGiphy5(response)
+            pCtrl.getNewGiphy6(response)
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[1].icon]).then(function(giphyResponse) {
-                //console.log('giphy ctrl: ', giphyResponse)
-                pCtrl.day1giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
-            })
+            // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[0].icon]).then(function(giphyResponse) {
+            //     console.log('getRandomGiphy: ', getRandomGiphy(giphyResponse.data))
+            //     console.log('giphy ctrl: ', giphyResponse)
+            //     pCtrl.day0giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            //     //pCtrl.day0giphy = giphyResponse.data[0].images.fixed_width.url                
+            // })
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[2].icon]).then(function(giphyResponse) {
-                //console.log('giphy ctrl: ', giphyResponse)
-                pCtrl.day2giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
-            })
+            // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[1].icon]).then(function(giphyResponse) {
+            //     //console.log('giphy ctrl: ', giphyResponse)
+            //     pCtrl.day1giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            // })
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[3].icon]).then(function(giphyResponse) {
-                //console.log('giphy ctrl: ', giphyResponse)
-                pCtrl.day3giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
-            })
+            // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[2].icon]).then(function(giphyResponse) {
+            //     //console.log('giphy ctrl: ', giphyResponse)
+            //     pCtrl.day2giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            // })
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[4].icon]).then(function(giphyResponse) {
-                //console.log('giphy ctrl: ', giphyResponse)
-                pCtrl.day4giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
-            })
+            // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[3].icon]).then(function(giphyResponse) {
+            //     //console.log('giphy ctrl: ', giphyResponse)
+            //     pCtrl.day3giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            // })
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[5].icon]).then(function(giphyResponse) {
-                //console.log('giphy ctrl: ', giphyResponse)
-                pCtrl.day5giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
-            })
+            // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[4].icon]).then(function(giphyResponse) {
+            //     //console.log('giphy ctrl: ', giphyResponse)
+            //     pCtrl.day4giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            // })
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[6].icon]).then(function(giphyResponse) {
-                //console.log('giphy ctrl: ', giphyResponse)
-                pCtrl.day6giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
-            })
+            // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[5].icon]).then(function(giphyResponse) {
+            //     //console.log('giphy ctrl: ', giphyResponse)
+            //     pCtrl.day5giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            // })
+
+            // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[6].icon]).then(function(giphyResponse) {
+            //     //console.log('giphy ctrl: ', giphyResponse)
+            //     pCtrl.day6giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url
+            // })
 
 
             // giphyAPIFactory.getGIFs('sunny').then(function(giphyResponse) {
