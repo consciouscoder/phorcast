@@ -134,7 +134,10 @@
 
             console.log('getNewGiphy0: ', response)
 
-            giphyAPIFactory.getGIFs(searchTerms[response.daily.data[0].icon]).then(function(giphyResponse) {
+              // switch to currently array instead of daily.data[0]
+              // giphyAPIFactory.getGIFs(searchTerms[response.daily.data[0].icon]).then(function(giphyResponse) {
+
+            giphyAPIFactory.getGIFs(searchTerms[response.currently.icon]).then(function(giphyResponse) {
                 console.log('getRandomGiphy: ', getRandomGiphy(giphyResponse.data))
                 console.log('giphy ctrl: ', giphyResponse)
                 pCtrl.day0giphy = getRandomGiphy(giphyResponse.data).images.fixed_width.url             
@@ -211,7 +214,7 @@
 
             //searchTerms[response.daily.data[0].icon]
             //flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
-            flickrAPIFactory.getImages(searchTerms[response.daily.data[0].icon]).then(function(flickrResponse) {
+            flickrAPIFactory.getImages(searchTerms[response.currently.icon]).then(function(flickrResponse) {
 
                 // Flickr image URL building syntax: https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
 
@@ -233,12 +236,12 @@
                 console.log(flickrResponse)
             })
 
-            pCtrl.day0summary = response.daily.data[0].summary
+            pCtrl.day0summary = response.currently.summary
             pCtrl.day0tempMax = Math.round(response.daily.data[0].temperatureMax)
             pCtrl.day0tempMin = Math.round(response.daily.data[0].temperatureMin)
 
             var skycons = new Skycons({"color": "LightBlue"}) // {"color": "pink"}
-            skycons.add("icon0", response.daily.data[0].icon)
+            skycons.add("icon0", response.currently.icon)
             skycons.add("icon1", response.daily.data[1].icon)
             skycons.add("icon2", response.daily.data[2].icon)
             skycons.add("icon3", response.daily.data[3].icon)
@@ -249,7 +252,7 @@
 
             var days = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat']
 
-            var d0 = new Date(response.daily.data[0].time * 1000)
+            var d0 = new Date(response.currently.time * 1000)
             var d1 = new Date(response.daily.data[1].time * 1000)
             var d2 = new Date(response.daily.data[2].time * 1000)
             var d3 = new Date(response.daily.data[3].time * 1000)
