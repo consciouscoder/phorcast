@@ -4,7 +4,7 @@
     
 <head>
     <meta charset=utf-8>
-    <title>Phorcast - Make weather fun.</title>
+    <title>Phorcast - Making weather fun.</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" type="text/css">     
@@ -79,8 +79,10 @@
               <div class="data-box">
                 {{ pCtrl.day0day }}, {{ pCtrl.day0date }}<BR>
                 {{ pCtrl.day0Temp }}&deg; F<BR>
-                Cloudy<BR>
-                {{ pCtrl.day0tempMax }}&deg; / {{ pCtrl.day0tempMin }}&deg;<BR>
+                {{ pCtrl.day0shortDesc }}<BR>
+                <div class="temp-box">
+                  <div class="tempHigh-box">{{ pCtrl.day0tempMax }}&deg;</div> / <div class="tempLow-box">{{ pCtrl.day0tempMin }}&deg;</div>
+                </div>
               </div>
               <div class="giphy-box">
                 <img ng-click="pCtrl.getNewGiphy0()" ng-src="{{ pCtrl.day0giphy }}">
@@ -98,8 +100,10 @@
             <div class="floating-box">
               <div class="data-box">
                 {{ pCtrl.day1day }}, {{ pCtrl.day1date }}<BR>
-                Cloudy<BR>
-                {{ pCtrl.day1tempMax }}&deg; / {{ pCtrl.day1tempMin }}&deg;<BR>
+                <div class="shortDesc-box">{{ pCtrl.day1shortDesc }}</div>
+                <div class="temp-box">
+                  <div class="tempHigh-box">{{ pCtrl.day1tempMax }}&deg;</div> / <div class="tempLow-box">{{ pCtrl.day1tempMin }}&deg;</div>
+                </div>
               </div>
               <div class="giphy-box">
                 <img ng-click="pCtrl.getNewGiphy1()" ng-src="{{ pCtrl.day1giphy }}">
@@ -117,8 +121,10 @@
             <div class="floating-box">
               <div class="data-box">
                 {{ pCtrl.day2day }}, {{ pCtrl.day2date }}<BR>
-                Cloudy<BR>
-                {{ pCtrl.day2tempMax }}&deg; / {{ pCtrl.day2tempMin }}&deg;<BR>
+                <div class="shortDesc-box">{{ pCtrl.day2shortDesc }}</div>
+                <div class="temp-box">
+                  <div class="tempHigh-box">{{ pCtrl.day2tempMax }}&deg;</div> / <div class="tempLow-box">{{ pCtrl.day2tempMin }}&deg;</div>
+                </div>
               </div>
                 <div class="giphy-box">
                 <img ng-click="pCtrl.getNewGiphy2()" ng-src="{{ pCtrl.day2giphy }}">
@@ -136,8 +142,10 @@
             <div class="floating-box">
               <div class="data-box">
                 {{ pCtrl.day3day }}, {{ pCtrl.day3date }}<BR>
-                Cloudy<BR>
-                {{ pCtrl.day3tempMax }}&deg; / {{ pCtrl.day3tempMin }}&deg;<BR>
+                <div class="shortDesc-box">{{ pCtrl.day3shortDesc }}</div>
+                <div class="temp-box">
+                  <div class="tempHigh-box">{{ pCtrl.day3tempMax }}&deg;</div> / <div class="tempLow-box">{{ pCtrl.day3tempMin }}&deg;</div>
+                </div>
               </div>
               <div class="giphy-box">
                 <img ng-click="pCtrl.getNewGiphy3()" ng-src="{{ pCtrl.day3giphy }}">
@@ -155,8 +163,10 @@
             <div class="floating-box">
               <div class="data-box">
                 {{ pCtrl.day4day }}, {{ pCtrl.day4date }}<BR>
-                Cloudy<BR>
-                {{ pCtrl.day4tempMax }}&deg; / {{ pCtrl.day4tempMin }}&deg;<BR>
+                <div class="shortDesc-box">{{ pCtrl.day4shortDesc }}</div>
+                <div class="temp-box">
+                  <div class="tempHigh-box">{{ pCtrl.day4tempMax }}&deg;</div> / <div class="tempLow-box">{{ pCtrl.day4tempMin }}&deg;</div>
+                </div>
               </div>
               <div class="giphy-box">
                 <img ng-click="pCtrl.getNewGiphy4()" ng-src="{{ pCtrl.day4giphy }}">
@@ -174,8 +184,10 @@
             <div class="floating-box">
               <div class="data-box">
                 {{ pCtrl.day5day }}, {{ pCtrl.day5date }}<BR>
-                Cloudy<BR>
-                {{ pCtrl.day5tempMax }}&deg; / {{ pCtrl.day5tempMin }}&deg;<BR>
+                <div class="shortDesc-box">{{ pCtrl.day5shortDesc }}</div>
+                <div class="temp-box">
+                  <div class="tempHigh-box">{{ pCtrl.day5tempMax }}&deg;</div> / <div class="tempLow-box">{{ pCtrl.day5tempMin }}&deg;</div>
+                </div>
               </div>
               <div class="giphy-box">
                 <img ng-click="pCtrl.getNewGiphy5()" ng-src="{{ pCtrl.day5giphy }}">
@@ -193,8 +205,10 @@
             <div class="floating-box">
               <div class="data-box">
                 {{ pCtrl.day6day }}, {{ pCtrl.day6date }}<BR>
-                Cloudy<BR>
-                {{ pCtrl.day6tempMax }}&deg; / {{ pCtrl.day6tempMin }}&deg;<BR>
+                <div class="shortDesc-box">{{ pCtrl.day6shortDesc }}</div>
+                <div class="temp-box">
+                  <div class="tempHigh-box">{{ pCtrl.day6tempMax }}&deg;</div> / <div class="tempLow-box">{{ pCtrl.day6tempMin }}&deg;</div>
+                </div>
               </div>
               <div class="giphy-box">
                 <img ng-click="pCtrl.getNewGiphy6()" ng-src="{{ pCtrl.day6giphy }}">
