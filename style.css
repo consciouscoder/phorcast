@@ -22,16 +22,26 @@
 	text-align: center;
 	vertical-align: middle;	
     margin: 0 auto; 
+    border-radius: 16px;
 }
 
 .city-name {
+	display: inline-block;
+  	font-size: 24px; 
 	text-align: center;
 	vertical-align: middle;	
+	background: White;
+	border: 5px solid Black; 
+	border-radius: 16px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	padding: 5px 5px 3px 3px; 
+
 }
 
 .city-box {
 
-	width: 600px;
+/*	width: 600px;*/
 
 	text-align: center;
 	vertical-align: middle;
@@ -67,9 +77,11 @@
     overflow: hidden;
     width: 350px;
     height: 205px;
-    border: 2px solid Grey;  
+    border: 3px solid Black;  
     margin: 10px;
     border-radius: 10px;
+    background: White;
+    clear: both;
 }
 
 .data-box {
@@ -77,7 +89,7 @@
 	position: relative;
 	float: left;
 	left: 0px;
-	width: 146px;
+	width: 144px;
 	height: 100px;
 	padding-top: 5px;
 	font-weight: bold;
@@ -86,10 +98,10 @@
 }
 
 .giphy-box {
-    left: 146px;
+    left: 144px;
     top: 0px;
 /*	float: right;*/
-	margin-left: 146px;
+	margin-left: 144px;
 	width: 200px;
 	height: 115px;
 	overflow: hidden;

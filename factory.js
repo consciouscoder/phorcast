@@ -98,7 +98,7 @@
 
                 console.log("calling flickr: ", tag)
 
-                var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f3fa1c74449c9e043db8f8176706ce75&format=json&nojsoncallback=1&tags=" + tag
+                var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=f3fa1c74449c9e043db8f8176706ce75&format=json&extras=url_l&nojsoncallback=1&tags=" + tag
 
                return $http.get(url).then(function(response) {
 
@@ -122,7 +122,7 @@
                 console.log("calling giphy: ", term)
 
                 var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=50&rating=pg-13&q=" + term
-
+                // var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=50&rating=pg-13&q=" + term
                 // var url = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=50&q=" + term
 
                return $http.get(url).then(function(response) {

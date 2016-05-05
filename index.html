@@ -4,7 +4,7 @@
     
 <head>
     <meta charset=utf-8>
-    <title>Mid-term Project</title>
+    <title>Phorcast - Make weather fun.</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" type="text/css">     
@@ -51,7 +51,9 @@
 
         <style> 
           body {
-            background-image: url({{  }})
+            background-image: url({{ pCtrl.flickrBackground }});
+            background-size: cover;
+  /*          opacity : 0.2;*/
           }
         </style>
 
@@ -65,10 +67,11 @@
                 <div class="map-box" id="map"></div>
             </div>
 
+          <div style="text-align: center;">
             <div class="city-name"> 
-               <h3>{{ pCtrl.cityName }}</h3>
+               7-Day Phorcast for: <B>{{ pCtrl.cityName }}</B>
             </div>
-
+          </div>
             
           <div class="box-container">
 
@@ -80,7 +83,7 @@
                 {{ pCtrl.day0tempMax }}&deg; / {{ pCtrl.day0tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img ng-click="pCtrl.getNewGiphy0()" src="{{ pCtrl.day0giphy }}">
+                <img ng-click="pCtrl.getNewGiphy0()" ng-src="{{ pCtrl.day0giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -99,7 +102,7 @@
                 {{ pCtrl.day1tempMax }}&deg; / {{ pCtrl.day1tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img ng-click="pCtrl.getNewGiphy1()" src="{{ pCtrl.day1giphy }}">
+                <img ng-click="pCtrl.getNewGiphy1()" ng-src="{{ pCtrl.day1giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -118,7 +121,7 @@
                 {{ pCtrl.day2tempMax }}&deg; / {{ pCtrl.day2tempMin }}&deg;<BR>
               </div>
                 <div class="giphy-box">
-                <img ng-click="pCtrl.getNewGiphy2()" src="{{ pCtrl.day2giphy }}">
+                <img ng-click="pCtrl.getNewGiphy2()" ng-src="{{ pCtrl.day2giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -137,7 +140,7 @@
                 {{ pCtrl.day3tempMax }}&deg; / {{ pCtrl.day3tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img ng-click="pCtrl.getNewGiphy3()" src="{{ pCtrl.day3giphy }}">
+                <img ng-click="pCtrl.getNewGiphy3()" ng-src="{{ pCtrl.day3giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -156,7 +159,7 @@
                 {{ pCtrl.day4tempMax }}&deg; / {{ pCtrl.day4tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img ng-click="pCtrl.getNewGiphy4()" src="{{ pCtrl.day4giphy }}">
+                <img ng-click="pCtrl.getNewGiphy4()" ng-src="{{ pCtrl.day4giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -175,7 +178,7 @@
                 {{ pCtrl.day5tempMax }}&deg; / {{ pCtrl.day5tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img ng-click="pCtrl.getNewGiphy5()" src="{{ pCtrl.day5giphy }}">
+                <img ng-click="pCtrl.getNewGiphy5()" ng-src="{{ pCtrl.day5giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">
@@ -194,7 +197,7 @@
                 {{ pCtrl.day6tempMax }}&deg; / {{ pCtrl.day6tempMin }}&deg;<BR>
               </div>
               <div class="giphy-box">
-                <img ng-click="pCtrl.getNewGiphy6()" src="{{ pCtrl.day6giphy }}">
+                <img ng-click="pCtrl.getNewGiphy6()" ng-src="{{ pCtrl.day6giphy }}">
               </div>
               <div class="summary-box">
                 <div class="summary-icon">

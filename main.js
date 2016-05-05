@@ -9,6 +9,7 @@
         var pCtrl = this
 
             pCtrl.ioResponse = {}
+            pCtrl.firstRun = true
 
             // Pairing Forecast.io icon values with giphy search strings.
                 var searchTerms = {
@@ -68,7 +69,16 @@
                 console.log("Google MAPS: Something went wrong. " + status)
               }
               // Get Forcast and populate everything =====
-              forecastAPIFactory.getForecast(results[0].geometry.location.lat(), results[0].geometry.location.lng()).then(setAPIForcast)
+              // =========== COMMENTED OUT -- added below
+              // if (!pCtrl.cityName) {
+                // FIX BACKGROUND BUG
+                if (!pCtrl.firstRun) {
+                  forecastAPIFactory.getForecast(results[0].geometry.location.lat(), results[0].geometry.location.lng()).then(setAPIForcast)
+                } else {
+                  pCtrl.firstRun = false
+                }
+              // }
+              // =========================================
             })
 
        }
@@ -99,6 +109,10 @@
         function getRandomGiphy(myArray) {
             return randomValue = myArray[Math.floor(Math.random() * myArray.length)]
         }
+
+        function getRandomFlickr(myFlickrArray) {
+            return randomFlickrValue = myFlickrArray[Math.floor(Math.random() * myFlickrArray.length)]
+        }        
 
         pCtrl.getNewGiphy0 = function(response) {
 
@@ -159,7 +173,7 @@
         }
 
         pCtrl.getNewGiphy6 = function(response) {
-        
+
             response = pCtrl.ioResponse
 
             giphyAPIFactory.getGIFs(searchTerms[response.daily.data[6].icon]).then(function(giphyResponse) {
@@ -173,14 +187,35 @@
 
             // Only update cityName for first city receive by IP, subsequent updates done in Google MAPS API call
             if (!pCtrl.cityName) {
-                pCtrl.cityName = response.city + ', ' + response.region
+                //pCtrl.cityName = response.city + ', ' + response.region
+                pCtrl.getCityForecast(response.city)
             }
 
             pCtrl.ioResponse = response
 
             pCtrl.day0Temp = Math.round(response.currently.temperature)
 
-            flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
+            //searchTerms[response.daily.data[0].icon]
+            //flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
+            flickrAPIFactory.getImages(searchTerms[response.daily.data[0].icon]).then(function(flickrResponse) {
+
+                // Flickr image URL building syntax: https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+
+                pCtrl.flickrBackground = getRandomFlickr(flickrResponse.photos.photo).url_l
+
+                if(!pCtrl.flickrBackground) {
+                    pCtrl.flickrBackground = getRandomFlickr(flickrResponse.photos.photo).url_l
+                }
+
+                console.log('getRandomFlickr: ' ,getRandomFlickr(flickrResponse.photos.photo))
+
+
+                // Manually build Flickr image URL =============
+                //pCtrl.flickrBackground = 'https://farm' + flickrResponse.photos.photo[0].farm + '.staticflickr.com/' + flickrResponse.photos.photo[0].server +'/' + flickrResponse.photos.photo[0].id + '_' + flickrResponse.photos.photo[0].secret +'.jpg'
+                // =============================================
+
+                console.log('flickr background: ', pCtrl.flickrBackground)
+
                 console.log(flickrResponse)
             })
 
@@ -229,14 +264,6 @@
 
             pCtrl.day6day = days[d6.getDay()] 
             pCtrl.day6date = d6.getMonth()+1 + '/' + d6.getDate() 
-            
-            // console.log('d0: ', days[d0.getDay()] + ', ' + d0.getMonth()+1 + '/' + d0.getDate())
-            // console.log('d1: ', d1.getMonth()+1 + '/' + d1.getDate())
-            // console.log('d2: ', d2.getMonth()+1 + '/' + d2.getDate())
-            // console.log('d3: ', d3.getMonth()+1 + '/' + d3.getDate())
-            // console.log('d4: ', d4.getMonth()+1 + '/' + d4.getDate())
-            // console.log('d5: ', d5.getMonth()+1 + '/' + d5.getDate())
-            // console.log('d6: ', d6.getMonth()+1 + '/' + d6.getDate())
 
             pCtrl.day1summary = response.daily.data[1].summary
             pCtrl.day1tempMax = Math.round(response.daily.data[1].temperatureMax)
@@ -324,75 +351,6 @@
     
 }());
 
-
-            // var p = new Promise(function(resolve, reject) {  
-            //    if (/* condition */) {
-            //       resolve(/* value */);  // fulfilled successfully
-            //    }
-            //    else {
-            //       reject(/* reason */);  // error, rejected
-            //    }
-            // });
-
-
-            // console.log(forecastAPIFactory)
-            
-   
-            // ipAPIFactory.getLatLong()
-            //     .then(function(response) {
-
-            //         // return response
-                    
-                    // pCtrl.data = response
-                    // pCtrl.lat = response.data.lat
-                    // pCtrl.lon = response.data.lon
-                    
-                    // // lat = response.data.lat
-                    // // lon = response.data.lon
-                    // console.log('IP API: ', response)    
-
-                    // forecastAPIFactory.getForecastData(response.lat, response.lon)
-                    //     .then(function(res) {
-
-                    //         console.log('forecast with LatLong ', res)
-                    //         pCtrl.currentWeather = res.currently
-                    //         console.log('pCtrl currentWeather: ', pCtrl.currentWeather)
-                    //         // pCtrl.weekly = res.data.daily.data
-                    //     })
-                    
-                    // console.log(pCtrl.lat, pCtrl.lon)
-
-                // }, function(error){
-                //     console.log('IP API error', error)
-                // })
-
-                // .then(function(response)) {
-
-                // }
-
-
-
-                
-            
-            // var url = "https://api.forecast.io/forecast/0c7f10d0d5fa0d8602b3c9664767e7f7/40.0481,-105.3842?callback=JSON_CALLBACK"
-            // //var url = "https://api.forecast.io/forecast/0c7f10d0d5fa0d8602b3c9664767e7f7/" + pCtrl.lat + "," + pCtrl.lon + "?callback=JSON_CALLBACK"
-
-            // console.log(url)
-            
-            // $http.jsonp(url)
-            //     .success(function(data) {
-            //         console.log('current day data: ', data.currently)
-            //         console.log('Today: ' + data.daily.data[0].summary)
-            //         console.log('Today current temp: ' + data.currently.temperature)
-            //         console.log('Today temp high: ' + data.daily.data[0].temperatureMax) 
-            //         console.log('Today temp low: ' + data.daily.data[0].temperatureMin)                                                    
-            //         console.log('Tomorrow: ' + data.daily.data[1].summary)       
-            //         console.log('All data: ', data.currently)             
-            //     })         
-                
-      
-        
-        // LOOK INTO PROMISES -- USEFUL
 
 
 
