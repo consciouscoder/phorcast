@@ -14,7 +14,7 @@
             // Pairing Forecast.io icon values with giphy search strings.
                 var searchTerms = {
                     "clear-day": "sun",
-                    "clear-night": "stars",
+                    "clear-night": "night+stars",
                     "rain": "rain",
                     "snow": "snow",
                     "sleet": "sleet",
@@ -203,10 +203,10 @@
         function setAPIForcast(response) {
 
             // Only update cityName for first city receive by IP, subsequent updates done in Google MAPS API call
-            if (!pCtrl.cityName) {
-                //pCtrl.cityName = response.city + ', ' + response.region
-                pCtrl.getCityForecast(response.city)
-            }
+            // if (!pCtrl.cityName) {
+            //     //pCtrl.cityName = response.city + ', ' + response.region
+            //     pCtrl.getCityForecast(response.city)
+            // }
 
             pCtrl.ioResponse = response
 
@@ -330,7 +330,12 @@
             pCtrl.day6tempMax = Math.round(response.daily.data[6].temperatureMax)
             pCtrl.day6tempMin = Math.round(response.daily.data[6].temperatureMin)
 
-             console.log("from factory",response)
+            console.log("from factory",response)
+
+            if (!pCtrl.cityName) {
+                //pCtrl.cityName = response.city + ', ' + response.region
+                pCtrl.getCityForecast(response.city)
+            }
 
        }
 

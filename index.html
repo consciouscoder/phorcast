@@ -6,8 +6,8 @@
     <meta charset=utf-8>
     <title>Phorcast - Making weather fun.</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
-    <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" type="text/css">     
+    <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2GJm8JWyDKBwdcdq_xRN-B1Q3KUGTPiQ"></script>
 </head>
 
@@ -17,36 +17,28 @@
                 <div class="navbar navbar-inverse navbar-static-top" role="navigation">
                   
                   <div class="navbar-header">
-<!--                     <button type="button" class="navbar-toggle"> -->
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
                     <!-- <span class="navbar-brand" rel="home" href="" title="Phorcast - Making weather fun!">PHORCAST</span> -->
                     <div class="logo-box"><img src="phorcast.png"></div>
                   </div>
-                  
-                  <div>
+                               
                     
-<!--                     <ul class="nav navbar-nav">
-                      <li><a href="/topic/notes/">/notes</a></li>
-                      <li><a href="/topic/dev/">/dev</a></li>
-                      <li><a href="/topic/good-reads/">/good-reads</a></li>
-                    </ul> -->
-                    
-                    <div class="col-sm-3 col-md-3 pull-right">
-                    <form class="navbar-form" role="search">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="City" name="srch-term" id="srch-term" ng-model="pCtrl.searchCity">
-                      <div class="input-group-btn">
-                        <button ng-click="pCtrl.getCityForecast(pCtrl.searchCity)"class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                      </div>
+                  <!--   <div class="col-sm-3 col-md-3 col-lg-4 pull-right"> -->
+               <!--    <form class="navbar-form"> -->
+                  <form class="navbar">                          
+
+                    <div class="search-bar" align="right">
+  
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="city, region, or place of interest" ng-model="pCtrl.searchCity">
+                          <div class="input-group-btn">
+                            <button ng-click="pCtrl.getCityForecast(pCtrl.searchCity)"class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                          </div>
+                        </div>
+                      
                     </div>
-                    </form>
-                    </div>
+                  </form>
                     
-                  </div>
+              
                 </div>
 
 
@@ -70,7 +62,7 @@
 
           <div style="text-align: center;">
             <div class="city-name"> 
-               7-Day Phorcast for: <B>{{ pCtrl.cityName }}</B>
+               7-day Phorcast for: <B>{{ pCtrl.cityName }}</B>
             </div>
           </div>
             
@@ -78,7 +70,10 @@
 
             <div class="floating-box">
               <div class="data-box">
-                {{ pCtrl.day0day }}, {{ pCtrl.day0date }}<BR>
+                <div>
+                  <div class="current-box">CURRENT</div>
+                </div>
+<!--                 {{ pCtrl.day0day }}, {{ pCtrl.day0date }}<BR> -->
                 {{ pCtrl.day0Temp }}&deg; F<BR>
                 {{ pCtrl.day0shortDesc }}<BR>
                 <div class="temp-box">

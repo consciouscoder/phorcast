@@ -1,21 +1,31 @@
 /*# Main CSS - mid-term*/
 
 .container {
-	width: 900px;
+/*	width: 900px;*/
 }
 
-.navbar-default {
-    background-color: #000000;
-    border-color: #000000;
+.search-bar {
+	float: right;
+	margin-right: 20px;
+	width: 30%;
 }
 
-.navbar-default .navbar-nav > li > a {
-    color: #000000;
+.search-bar input, button {
+	margin-top: 7px;
+	width: 30%;
 }
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    background-color: #E7E7E7;
-    color: #000000;
+
+.search-bar button {
+	margin-top: 7px;
+	margin-left: 0px;
+	float: left;
+	width: 100%;
 }
+
+.navbar {
+	margin-bottom: 0px;
+}
+
 
 .logo-box {
 	margin-top: 5px;
@@ -35,11 +45,12 @@
 }
 
 .map-box {
-	width: 700px;
+	width: 97%;
 	height: 145px;
 	text-align: center;
 	vertical-align: middle;	
     margin: 0 auto; 
+    margin-top: 10px;
     border-radius: 16px;
 }
 
@@ -69,7 +80,7 @@
 
 .city-text {
 	display: inline-block;
-	width: 400px;
+/*	width: 400px;*/
 	position: relative;
 	text-align: right;
 }
@@ -111,6 +122,18 @@
 	height: 100px;
 	padding-top: 5px;
 	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.current-box {
+	font-size: 12px;
+	display: inline-block;
+	padding: 1px;
+	background: Black;
+	color: White;
+	width: 70%;
+	border-radius: 10px;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -187,4 +210,33 @@
 	padding-top: 30px;
 	padding-left: 5px;
 	padding-right: 5px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+	.search-bar {
+		float: right;
+		margin-right: 10px;
+		width: 50%;
+	}
+
+	.search-bar input {
+		width: 50%;
+	}
+
+}
+
+
+@media only screen and (max-width: 500px) {
+
+	.search-bar {
+		float: right;
+		margin-right: 10px;
+		width: 95%;
+	}
+
+	.search-bar input {
+		width: 95%;
+	}
 }
