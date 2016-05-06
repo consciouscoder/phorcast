@@ -21,7 +21,7 @@
                     "wind": "tornado",
                     "fog": "foggy",
                     "cloudy": "clouds",
-                    "partly-cloudy-day": "cloudy+sun",
+                    "partly-cloudy-day": "clouds+sun",
                     "partly-cloudy-night": "clouds+night"
                 }
 
@@ -214,6 +214,9 @@
 
             //searchTerms[response.daily.data[0].icon]
             //flickrAPIFactory.getImages('rain').then(function(flickrResponse) {
+
+            // added city to Flickr image -- flickrAPIFactory.getImages(searchTerms[response.currently.icon] + '+' + response.city).then(function(flickrResponse) {
+
             flickrAPIFactory.getImages(searchTerms[response.currently.icon]).then(function(flickrResponse) {
 
                 // Flickr image URL building syntax: https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
