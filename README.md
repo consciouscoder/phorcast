@@ -1,9 +1,7 @@
-Phorcast
-
 # phorcast - http://phorcast.dan.earth
 AngularJS Weather API mash-up of Forecast.io, Flickr, IP API, Google API, and a GIPHY that relates to the weather
 
-Phorcast is a 7-day weather forecast with a bit GIPHY humor for each day. 
+Phorcast is a 7-day weather forecast with some GIPHY humor for each day. 
 
 Phorcast pulls in data from 5 different APIs and displays it synergistically. 
 
